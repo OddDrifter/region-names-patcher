@@ -1,0 +1,27 @@
+{
+  "FormKey": "00080E:Unique Region Names.esp",
+  "EditorID": "xxxMapCollege",
+  "MapColor": "#005FF2FA",
+  "Worldspace": "00003C:Skyrim.esm",
+  "RegionAreas": [
+    {
+      "EdgeFallOff": 1024,
+      "RegionPointListData": [
+        "110893.6, 106748.34",
+        "118298.54, 106748.34",
+        "117954.11, 114669.91",
+        "110893.6, 114669.91"
+      ]
+    }
+  ],
+  "Map": {
+    "Flags": [
+      "Override"
+    ],
+    "Priority": 60,
+    "Name": {
+      "TargetLanguage": "English",
+      "Value": "College of Winterhold"
+    }
+  }
+}

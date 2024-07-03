@@ -1,0 +1,29 @@
+{
+  "FormKey": "000818:Unique Region Names.esp",
+  "EditorID": "xxxMapHelgen",
+  "MapColor": "#000A0FC8",
+  "Worldspace": "00003C:Skyrim.esm",
+  "RegionAreas": [
+    {
+      "EdgeFallOff": 1024,
+      "RegionPointListData": [
+        "12346.104, -69816.984",
+        "12475.428, -85594.33",
+        "19976.13, -85723.65",
+        "19976.13, -73825.98",
+        "15967.139, -73955.3",
+        "15967.139, -69687.66"
+      ]
+    }
+  ],
+  "Map": {
+    "Flags": [
+      "Override"
+    ],
+    "Priority": 60,
+    "Name": {
+      "TargetLanguage": "English",
+      "Value": "Helgen"
+    }
+  }
+}

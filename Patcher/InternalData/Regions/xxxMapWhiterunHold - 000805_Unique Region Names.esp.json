@@ -1,0 +1,29 @@
+{
+  "FormKey": "000805:Unique Region Names.esp",
+  "EditorID": "xxxMapWhiterunHold",
+  "MapColor": "#005A5025",
+  "Worldspace": "00003C:Skyrim.esm",
+  "RegionAreas": [
+    {
+      "EdgeFallOff": 1024,
+      "RegionPointListData": [
+        "39526.32, -31866.062",
+        "39526.32, -52167.883",
+        "-97071.836, -52030.477",
+        "-123616.086, 47928.465",
+        "74292.266, 43229.344",
+        "73774.55, -31839.54"
+      ]
+    }
+  ],
+  "Map": {
+    "Flags": [
+      "Override"
+    ],
+    "Priority": 56,
+    "Name": {
+      "TargetLanguage": "English",
+      "Value": "Whiterun Hold"
+    }
+  }
+}

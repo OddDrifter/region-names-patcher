@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Platforms>x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Mutagen.Bethesda.Serialization" Version="1.20.1" />
+    <PackageReference Include="Mutagen.Bethesda.Serialization.Newtonsoft" Version="1.20.1" />
+    <PackageReference Include="Mutagen.Bethesda.Serialization.SourceGenerator" Version="1.20.1" />
+    <PackageReference Include="Mutagen.Bethesda.Skyrim" Version="0.44.0" />
+    <PackageReference Include="Noggog.CSharpExt" Version="2.65.0-nightly-20240622-092375" />
+  </ItemGroup>
+
+</Project>

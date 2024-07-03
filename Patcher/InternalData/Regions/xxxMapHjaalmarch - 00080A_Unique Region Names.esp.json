@@ -1,0 +1,32 @@
+{
+  "FormKey": "00080A:Unique Region Names.esp",
+  "EditorID": "xxxMapHjaalmarch",
+  "MapColor": "#00804000",
+  "Worldspace": "00003C:Skyrim.esm",
+  "RegionAreas": [
+    {
+      "EdgeFallOff": 1024,
+      "RegionPointListData": [
+        "-123127.8, 65482.766",
+        "-122116.484, 59920.523",
+        "-119983.38, 53118.117",
+        "-91440.48, 37549.25",
+        "-103.19531, 33916.51",
+        "-2781.1094, 71550.664",
+        "11377.3125, 83686.47",
+        "-47279.047, 89248.7",
+        "-118426.49, 65573.2"
+      ]
+    }
+  ],
+  "Map": {
+    "Flags": [
+      "Override"
+    ],
+    "Priority": 59,
+    "Name": {
+      "TargetLanguage": "English",
+      "Value": "Hjaalmarch"
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "FormKey": "037562:Dragonborn.esm",
+  "EditorID": "WeatherSkaalVillage01",
+  "MapColor": "#00D20005",
+  "Worldspace": "000800:Dragonborn.esm",
+  "RegionAreas": [
+    {
+      "EdgeFallOff": 1024,
+      "RegionPointListData": [
+        "64050.055, 64182.3",
+        "64050.055, 79383.05",
+        "74183.88, 79383.05",
+        "75285.39, 64843.203"
+      ]
+    }
+  ],
+  "Weather": {
+    "Priority": 100,
+    "Weathers": [
+      {
+        "Weather": "0C8221:Skyrim.esm",
+        "Chance": 35
+      },
+      {
+        "Weather": "04D7FB:Skyrim.esm",
+        "Chance": 25
+      },
+      {
+        "Weather": "10A245:Skyrim.esm",
+        "Chance": 25
+      },
+      {
+        "Weather": "10E1EF:Skyrim.esm",
+        "Chance": 15
+      }
+    ]
+  },
+  "Map": {
+    "Flags": [
+      "Override"
+    ],
+    "Priority": 65,
+    "Name": {
+      "TargetLanguage": "English",
+      "Value": "Skaal Village"
+    }
+  },
+  "Sounds": {
+    "Priority": 50,
+    "Music": "08690F:Skyrim.esm",
+    "Sounds": [
+      {
+        "Sound": "0CF2C7:Skyrim.esm",
+        "Flags": [
+          "Pleasant",
+          "Cloudy",
+          "Rainy",
+          "Snowy"
+        ],
+        "Chance": 1.0
+      },
+      {
+        "Sound": "0CF2CA:Skyrim.esm",
+        "Flags": [
+          "Pleasant",
+          "Cloudy",
+          "Rainy",
+          "Snowy"
+        ],
+        "Chance": 0.05
+      }
+    ]
+  }
+}

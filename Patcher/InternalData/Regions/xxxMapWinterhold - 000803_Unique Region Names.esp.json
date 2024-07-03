@@ -1,0 +1,27 @@
+{
+  "FormKey": "000803:Unique Region Names.esp",
+  "EditorID": "xxxMapWinterhold",
+  "MapColor": "#006165F8",
+  "Worldspace": "00003C:Skyrim.esm",
+  "RegionAreas": [
+    {
+      "EdgeFallOff": 1024,
+      "RegionPointListData": [
+        "106760.59, 106403.92",
+        "106588.39, 98654.57",
+        "114159.86, 98584.71",
+        "114509.95, 106403.92"
+      ]
+    }
+  ],
+  "Map": {
+    "Flags": [
+      "Override"
+    ],
+    "Priority": 60,
+    "Name": {
+      "TargetLanguage": "English",
+      "Value": "Winterhold"
+    }
+  }
+}

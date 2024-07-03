@@ -1,0 +1,35 @@
+{
+  "FormKey": "000819:Unique Region Names.esp",
+  "MajorRecordFlagsRaw": 64,
+  "EditorID": "xxxMapCastleVolkihar",
+  "SkyrimMajorRecordFlags": [
+    "0x40"
+  ],
+  "MapColor": "#00FFFF00",
+  "Worldspace": "00003C:Skyrim.esm",
+  "RegionAreas": [
+    {
+      "EdgeFallOff": 1024,
+      "RegionPointListData": [
+        "-165984.6, 104672.51",
+        "-193050.31, 132290.58",
+        "-193050.31, 170403.53",
+        "-153832.66, 169298.8",
+        "-133947.66, 147204.34"
+      ]
+    }
+  ],
+  "Map": {
+    "Flags": [
+      "Override"
+    ],
+    "Priority": 35,
+    "Name": {
+      "TargetLanguage": "English",
+      "Value": "Castle Volkihar"
+    }
+  },
+  "MajorFlags": [
+    "BorderRegion"
+  ]
+}

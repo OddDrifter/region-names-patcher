@@ -1,0 +1,27 @@
+{
+  "FormKey": "000810:Unique Region Names.esp",
+  "EditorID": "xxxMapRiverwood",
+  "MapColor": "#0000FF00",
+  "Worldspace": "00003C:Skyrim.esm",
+  "RegionAreas": [
+    {
+      "EdgeFallOff": 1024,
+      "RegionPointListData": [
+        "16746.098, -48745.117",
+        "16746.098, -33013.688",
+        "32292.45, -32828.61",
+        "32292.45, -48745.117"
+      ]
+    }
+  ],
+  "Map": {
+    "Flags": [
+      "Override"
+    ],
+    "Priority": 60,
+    "Name": {
+      "TargetLanguage": "English",
+      "Value": "Riverwood"
+    }
+  }
+}

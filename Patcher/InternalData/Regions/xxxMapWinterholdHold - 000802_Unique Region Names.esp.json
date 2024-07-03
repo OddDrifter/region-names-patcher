@@ -1,0 +1,29 @@
+{
+  "FormKey": "000802:Unique Region Names.esp",
+  "EditorID": "xxxMapWinterholdHold",
+  "MapColor": "#003338F4",
+  "Worldspace": "00003C:Skyrim.esm",
+  "RegionAreas": [
+    {
+      "EdgeFallOff": 1024,
+      "RegionPointListData": [
+        "135382.84, 93447.875",
+        "117780.484, 114674.234",
+        "63280.664, 110195.87",
+        "64838.71, 45796.367",
+        "180424.16, 56690.008",
+        "147808.03, 88788.42"
+      ]
+    }
+  ],
+  "Map": {
+    "Flags": [
+      "Override"
+    ],
+    "Priority": 56,
+    "Name": {
+      "TargetLanguage": "English",
+      "Value": "Winterhold Hold"
+    }
+  }
+}

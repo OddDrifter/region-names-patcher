@@ -1,0 +1,27 @@
+{
+  "FormKey": "01B9A9:Dragonborn.esm",
+  "EditorID": "DLC2NavmeshRegion",
+  "MapColor": "#00FF0000",
+  "Worldspace": "000800:Dragonborn.esm",
+  "RegionAreas": [
+    {
+      "EdgeFallOff": 0,
+      "RegionPointListData": [
+        "16835.36, 10074.859",
+        "16308.961, 97980.48",
+        "88949.516, 97980.48",
+        "88949.516, 9548.477"
+      ]
+    }
+  ],
+  "Map": {
+    "Flags": [
+      "Override"
+    ],
+    "Priority": 50,
+    "Name": {
+      "TargetLanguage": "English",
+      "Value": "Isinfier Plains"
+    }
+  }
+}

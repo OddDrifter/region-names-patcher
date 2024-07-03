@@ -1,0 +1,42 @@
+{
+  "FormKey": "00080C:Unique Region Names.esp",
+  "EditorID": "xxxMapEastmarch",
+  "MapColor": "#00010000",
+  "Worldspace": "00003C:Skyrim.esm",
+  "RegionAreas": [
+    {
+      "EdgeFallOff": 1024,
+      "RegionPointListData": [
+        "138161.4, 48543.21",
+        "72109.62, 44757.664",
+        "70475.625, 11082.148",
+        "77822.45, -58593.133",
+        "195715.03, -70018.85",
+        "193706.03, -8401.703",
+        "168500.9, 22404.562",
+        "173168.53, 32673.32",
+        "173635.28, 52277.305"
+      ]
+    },
+    {
+      "EdgeFallOff": 1024,
+      "RegionPointListData": [
+        "187394.92, -201591.31",
+        "70995.34, -195494.19",
+        "68689.46, -133964.62",
+        "186308.62, -142328.66",
+        "188399.64, -172125.53"
+      ]
+    }
+  ],
+  "Map": {
+    "Flags": [
+      "Override"
+    ],
+    "Priority": 57,
+    "Name": {
+      "TargetLanguage": "English",
+      "Value": "Eastmarch"
+    }
+  }
+}

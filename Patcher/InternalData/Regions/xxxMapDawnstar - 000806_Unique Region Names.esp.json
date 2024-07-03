@@ -1,0 +1,27 @@
+{
+  "FormKey": "000806:Unique Region Names.esp",
+  "EditorID": "xxxMapDawnstar",
+  "MapColor": "#003C5659",
+  "Worldspace": "00003C:Skyrim.esm",
+  "RegionAreas": [
+    {
+      "EdgeFallOff": 1024,
+      "RegionPointListData": [
+        "24864.508, 98837",
+        "24864.508, 114102.625",
+        "35550.45, 114102.625",
+        "35359.63, 99027.82"
+      ]
+    }
+  ],
+  "Map": {
+    "Flags": [
+      "Override"
+    ],
+    "Priority": 60,
+    "Name": {
+      "TargetLanguage": "English",
+      "Value": "Dawnstar"
+    }
+  }
+}

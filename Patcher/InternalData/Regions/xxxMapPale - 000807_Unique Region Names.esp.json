@@ -1,0 +1,27 @@
+{
+  "FormKey": "000807:Unique Region Names.esp",
+  "EditorID": "xxxMapPale",
+  "MapColor": "#007891AF",
+  "Worldspace": "00003C:Skyrim.esm",
+  "RegionAreas": [
+    {
+      "EdgeFallOff": 1024,
+      "RegionPointListData": [
+        "-23556.11, 117262.83",
+        "72739.125, 112085.67",
+        "74108.39, 29764.82",
+        "-19304.766, 33397.54"
+      ]
+    }
+  ],
+  "Map": {
+    "Flags": [
+      "Override"
+    ],
+    "Priority": 58,
+    "Name": {
+      "TargetLanguage": "English",
+      "Value": "The Pale"
+    }
+  }
+}

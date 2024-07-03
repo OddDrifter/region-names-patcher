@@ -1,0 +1,27 @@
+{
+  "FormKey": "000817:Unique Region Names.esp",
+  "EditorID": "xxxMapChargenExit",
+  "MapColor": "#00FFFFFF",
+  "Worldspace": "00003C:Skyrim.esm",
+  "RegionAreas": [
+    {
+      "EdgeFallOff": 1024,
+      "RegionPointListData": [
+        "8725.076, -69816.984",
+        "8725.076, -73308.69",
+        "11440.85, -73308.69",
+        "11440.85, -70334.27"
+      ]
+    }
+  ],
+  "Map": {
+    "Flags": [
+      "Override"
+    ],
+    "Priority": 61,
+    "Name": {
+      "TargetLanguage": "English",
+      "Value": "Skyrim"
+    }
+  }
+}

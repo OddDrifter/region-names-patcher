@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Platforms>x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Mutagen.Bethesda" Version="0.44.0" />
+    <PackageReference Include="Mutagen.Bethesda.Synthesis" Version="0.28.0" />
+    <PackageReference Include="Noggog.CSharpExt" Version="2.65.0-nightly-20240622-092375" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="InternalData\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Patcher.Serialization\Patcher.Serialization.csproj" />
+  </ItemGroup>
+
+</Project>

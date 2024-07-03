@@ -1,0 +1,27 @@
+{
+  "FormKey": "000813:Unique Region Names.esp",
+  "EditorID": "xxxMapKarthwasten",
+  "MapColor": "#00E1DE60",
+  "Worldspace": "00003C:Skyrim.esm",
+  "RegionAreas": [
+    {
+      "EdgeFallOff": 1024,
+      "RegionPointListData": [
+        "-125156.61, 44036.125",
+        "-137939.66, 44036.125",
+        "-137939.66, 37644.6",
+        "-123558.734, 37644.6"
+      ]
+    }
+  ],
+  "Map": {
+    "Flags": [
+      "Override"
+    ],
+    "Priority": 61,
+    "Name": {
+      "TargetLanguage": "English",
+      "Value": "Karthwasten"
+    }
+  }
+}

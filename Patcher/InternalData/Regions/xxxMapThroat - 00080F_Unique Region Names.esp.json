@@ -1,0 +1,27 @@
+{
+  "FormKey": "00080F:Unique Region Names.esp",
+  "EditorID": "xxxMapThroat",
+  "MapColor": "#00FFFFFF",
+  "Worldspace": "00003C:Skyrim.esm",
+  "RegionAreas": [
+    {
+      "EdgeFallOff": 1024,
+      "RegionPointListData": [
+        "35755.066, -25874.031",
+        "34197.016, -60151.184",
+        "78341.805, -59631.836",
+        "77822.45, -26393.387"
+      ]
+    }
+  ],
+  "Map": {
+    "Flags": [
+      "Override"
+    ],
+    "Priority": 55,
+    "Name": {
+      "TargetLanguage": "English",
+      "Value": "The Throat of the World"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "Nickname": "Unique Region Names",
+  "Visibility": "Visible",
+  "OneLineDescription": "Relabels exterior region names from Skyrim to thier actual region name.",
+  "LongDescription": "This patcher relabels exterior region names to thier actual region name. This requires Regional Save Names by powerofthree to be installed. It should probably not be used in conjunction with other mods that do the same or similar things (this includes the original Unique Region Names).",
+  "PreferredAutoVersioning": "Default",
+  "RequiredMods": [],
+  "TargetedReleases": [
+    "SkyrimSE",
+    "SkyrimSEGog"
+  ]
+}

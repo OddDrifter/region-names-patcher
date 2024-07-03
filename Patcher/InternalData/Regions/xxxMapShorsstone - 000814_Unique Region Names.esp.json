@@ -1,0 +1,27 @@
+{
+  "FormKey": "000814:Unique Region Names.esp",
+  "EditorID": "xxxMapShorsstone",
+  "MapColor": "#0000FFFF",
+  "Worldspace": "00003C:Skyrim.esm",
+  "RegionAreas": [
+    {
+      "EdgeFallOff": 1024,
+      "RegionPointListData": [
+        "160274.98, -65222.094",
+        "167247.48, -64786.312",
+        "167392.75, -57523.297",
+        "160710.77, -57959.08"
+      ]
+    }
+  ],
+  "Map": {
+    "Flags": [
+      "Override"
+    ],
+    "Priority": 60,
+    "Name": {
+      "TargetLanguage": "English",
+      "Value": "Shor's Stone"
+    }
+  }
+}

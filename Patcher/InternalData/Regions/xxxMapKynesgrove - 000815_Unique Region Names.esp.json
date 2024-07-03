@@ -1,0 +1,28 @@
+{
+  "FormKey": "000815:Unique Region Names.esp",
+  "EditorID": "xxxMapKynesgrove",
+  "MapColor": "#000A0FC8",
+  "Worldspace": "00003C:Skyrim.esm",
+  "RegionAreas": [
+    {
+      "EdgeFallOff": 1024,
+      "RegionPointListData": [
+        "135189.3, 4238.9463",
+        "131090.92, 8434.903",
+        "131276.56, 16212.506",
+        "143190.89, 16241.337",
+        "142934.12, 4448.9707"
+      ]
+    }
+  ],
+  "Map": {
+    "Flags": [
+      "Override"
+    ],
+    "Priority": 60,
+    "Name": {
+      "TargetLanguage": "English",
+      "Value": "Kynesgrove"
+    }
+  }
+}

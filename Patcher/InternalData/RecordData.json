@@ -1,0 +1,41 @@
+{
+  "SpriggitSource": {
+    "PackageName": "Spriggit.Json.Skyrim",
+    "Version": "0.24.0"
+  },
+  "ModKey": "Unique Region Names.esp",
+  "GameRelease": "SkyrimSE",
+  "ModHeader": {
+    "Flags": [
+      "Light"
+    ],
+    "Stats": {
+      "Version": 1.7
+    },
+    "Author": "Beowulf, Pragasette",
+    "Description": "{{BASH:C.Regions}}",
+    "MasterReferences": [
+      {
+        "Master": "Skyrim.esm",
+        "FileSize": 0
+      },
+      {
+        "Master": "Update.esm",
+        "FileSize": 0
+      },
+      {
+        "Master": "Dawnguard.esm",
+        "FileSize": 0
+      },
+      {
+        "Master": "HearthFires.esm",
+        "FileSize": 0
+      },
+      {
+        "Master": "Dragonborn.esm",
+        "FileSize": 0
+      }
+    ],
+    "INTV": 1
+  }
+}

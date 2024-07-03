@@ -1,0 +1,123 @@
+{
+  "FormKey": "0374BC:Dragonborn.esm",
+  "EditorID": "WeatherRavenRock01",
+  "MapColor": "#00FFFF00",
+  "Worldspace": "000800:Dragonborn.esm",
+  "RegionAreas": [
+    {
+      "EdgeFallOff": 1024,
+      "RegionPointListData": [
+        "16500.145, 29709.195",
+        "17028.027, 44225.805",
+        "35503.715, 48184.875",
+        "36031.59, 29445.256"
+      ]
+    }
+  ],
+  "Weather": {
+    "Priority": 100,
+    "Weathers": [
+      {
+        "Weather": "0374B9:Dragonborn.esm",
+        "Chance": 35
+      },
+      {
+        "Weather": "0374B8:Dragonborn.esm",
+        "Chance": 35
+      },
+      {
+        "Weather": "031AC0:Dragonborn.esm",
+        "Chance": 15
+      },
+      {
+        "Weather": "018471:Dragonborn.esm",
+        "Chance": 15
+      }
+    ]
+  },
+  "Map": {
+    "Flags": [
+      "Override"
+    ],
+    "Priority": 65,
+    "Name": {
+      "TargetLanguage": "English",
+      "Value": "Raven Rock"
+    }
+  },
+  "Sounds": {
+    "Priority": 50,
+    "Sounds": [
+      {
+        "Sound": "0195C1:Dragonborn.esm",
+        "Flags": [
+          "Pleasant",
+          "Cloudy",
+          "Rainy",
+          "Snowy"
+        ],
+        "Chance": 0.05
+      },
+      {
+        "Sound": "0195C2:Dragonborn.esm",
+        "Flags": [
+          "Pleasant",
+          "Cloudy",
+          "Rainy",
+          "Snowy"
+        ],
+        "Chance": 0.05
+      },
+      {
+        "Sound": "038689:Dragonborn.esm",
+        "Flags": [
+          "Pleasant",
+          "Cloudy",
+          "Rainy",
+          "Snowy"
+        ],
+        "Chance": 0.03
+      },
+      {
+        "Sound": "03868A:Dragonborn.esm",
+        "Flags": [
+          "Pleasant",
+          "Cloudy",
+          "Rainy",
+          "Snowy"
+        ],
+        "Chance": 0.03
+      },
+      {
+        "Sound": "03868B:Dragonborn.esm",
+        "Flags": [
+          "Pleasant",
+          "Cloudy",
+          "Rainy",
+          "Snowy"
+        ],
+        "Chance": 0.03
+      },
+      {
+        "Sound": "03868C:Dragonborn.esm",
+        "Flags": [
+          "Pleasant",
+          "Cloudy",
+          "Rainy",
+          "Snowy"
+        ],
+        "Chance": 0.03
+      },
+      {
+        "Sound": "01E0C3:Dragonborn.esm",
+        "Flags": [
+          "Pleasant",
+          "Cloudy",
+          "Rainy",
+          "Snowy"
+        ],
+        "Chance": 0.03
+      }
+    ]
+  }
+}

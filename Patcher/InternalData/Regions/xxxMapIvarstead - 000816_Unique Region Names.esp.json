@@ -1,0 +1,32 @@
+{
+  "FormKey": "000816:Unique Region Names.esp",
+  "EditorID": "xxxMapIvarstead",
+  "MapColor": "#00FF8000",
+  "Worldspace": "00003C:Skyrim.esm",
+  "RegionAreas": [
+    {
+      "EdgeFallOff": 1024,
+      "RegionPointListData": [
+        "73871.42, -57481.203",
+        "77370.62, -57481.203",
+        "77370.62, -64936.004",
+        "81174.09, -65240.28",
+        "81326.23, -73455.78",
+        "73871.42, -69195.89",
+        "69763.67, -64936.004",
+        "69915.81, -61741.086",
+        "74327.84, -61893.227"
+      ]
+    }
+  ],
+  "Map": {
+    "Flags": [
+      "Override"
+    ],
+    "Priority": 60,
+    "Name": {
+      "TargetLanguage": "English",
+      "Value": "Ivarstead"
+    }
+  }
+}

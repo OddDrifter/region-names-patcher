@@ -1,0 +1,27 @@
+{
+  "FormKey": "000812:Unique Region Names.esp",
+  "EditorID": "xxxMapDragonbridge",
+  "MapColor": "#00010000",
+  "Worldspace": "00003C:Skyrim.esm",
+  "RegionAreas": [
+    {
+      "EdgeFallOff": 1024,
+      "RegionPointListData": [
+        "-105982.05, 79722.11",
+        "-105982.05, 85581",
+        "-99057.91, 85581",
+        "-100123.16, 79189.484"
+      ]
+    }
+  ],
+  "Map": {
+    "Flags": [
+      "Override"
+    ],
+    "Priority": 60,
+    "Name": {
+      "TargetLanguage": "English",
+      "Value": "Dragon Bridge"
+    }
+  }
+}

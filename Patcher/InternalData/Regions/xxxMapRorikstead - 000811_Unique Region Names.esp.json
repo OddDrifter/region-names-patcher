@@ -1,0 +1,27 @@
+{
+  "FormKey": "000811:Unique Region Names.esp",
+  "EditorID": "xxxMapRorikstead",
+  "MapColor": "#00400040",
+  "Worldspace": "00003C:Skyrim.esm",
+  "RegionAreas": [
+    {
+      "EdgeFallOff": 1024,
+      "RegionPointListData": [
+        "-87872.73, 5686.992",
+        "-89470.61, 11013.258",
+        "-79883.33, 9948.008",
+        "-79883.33, 5686.992"
+      ]
+    }
+  ],
+  "Map": {
+    "Flags": [
+      "Override"
+    ],
+    "Priority": 60,
+    "Name": {
+      "TargetLanguage": "English",
+      "Value": "Rorikstead"
+    }
+  }
+}

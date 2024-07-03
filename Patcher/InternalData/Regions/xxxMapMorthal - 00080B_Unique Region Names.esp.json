@@ -1,0 +1,27 @@
+{
+  "FormKey": "00080B:Unique Region Names.esp",
+  "EditorID": "xxxMapMorthal",
+  "MapColor": "#00CE6700",
+  "Worldspace": "00003C:Skyrim.esm",
+  "RegionAreas": [
+    {
+      "EdgeFallOff": 1024,
+      "RegionPointListData": [
+        "-44798.992, 73334.4",
+        "-43787.023, 62202.727",
+        "-33464.92, 62000.332",
+        "-33464.92, 73132"
+      ]
+    }
+  ],
+  "Map": {
+    "Flags": [
+      "Override"
+    ],
+    "Priority": 60,
+    "Name": {
+      "TargetLanguage": "English",
+      "Value": "Morthal"
+    }
+  }
+}

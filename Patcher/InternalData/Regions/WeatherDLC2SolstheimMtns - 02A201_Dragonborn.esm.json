@@ -1,0 +1,106 @@
+{
+  "FormKey": "02A201:Dragonborn.esm",
+  "EditorID": "WeatherDLC2SolstheimMtns",
+  "MapColor": "#0077BDAD",
+  "Worldspace": "000800:Dragonborn.esm",
+  "RegionAreas": [
+    {
+      "EdgeFallOff": 1024,
+      "RegionPointListData": [
+        "-10157.641, 53463.66",
+        "26420.367, 50716.742",
+        "46987.418, 55776.7",
+        "52814.277, 64516.992",
+        "54028.203, 75199.57",
+        "32663.053, 72528.92",
+        "22466.047, 114530.89",
+        "-6435.7812, 110244.36"
+      ]
+    }
+  ],
+  "Weather": {
+    "Priority": 60,
+    "Weathers": [
+      {
+        "Weather": "10A236:Skyrim.esm",
+        "Chance": 35
+      },
+      {
+        "Weather": "10A234:Skyrim.esm",
+        "Chance": 25
+      },
+      {
+        "Weather": "04D7FB:Skyrim.esm",
+        "Chance": 10
+      },
+      {
+        "Weather": "10E1E7:Skyrim.esm",
+        "Chance": 5
+      },
+      {
+        "Weather": "10E1E8:Skyrim.esm",
+        "Chance": 5
+      },
+      {
+        "Weather": "0C8221:Skyrim.esm",
+        "Chance": 5
+      }
+    ]
+  },
+  "Map": {
+    "Flags": [
+      "Override"
+    ],
+    "Priority": 55,
+    "Name": {
+      "TargetLanguage": "English",
+      "Value": "Moesring Mountains"
+    }
+  },
+  "Sounds": {
+    "Priority": 50,
+    "Music": "03D4A4:Dragonborn.esm",
+    "Sounds": [
+      {
+        "Sound": "0CF2C7:Skyrim.esm",
+        "Flags": [
+          "Pleasant",
+          "Cloudy",
+          "Rainy",
+          "Snowy"
+        ],
+        "Chance": 1.0
+      },
+      {
+        "Sound": "03E602:Skyrim.esm",
+        "Flags": [
+          "Pleasant",
+          "Cloudy",
+          "Rainy",
+          "Snowy"
+        ],
+        "Chance": 0.08
+      },
+      {
+        "Sound": "0CF2CA:Skyrim.esm",
+        "Flags": [
+          "Pleasant",
+          "Cloudy",
+          "Rainy",
+          "Snowy"
+        ],
+        "Chance": 0.08
+      },
+      {
+        "Sound": "01E0C3:Dragonborn.esm",
+        "Flags": [
+          "Pleasant",
+          "Cloudy",
+          "Rainy",
+          "Snowy"
+        ],
+        "Chance": 0.04
+      }
+    ]
+  }
+}

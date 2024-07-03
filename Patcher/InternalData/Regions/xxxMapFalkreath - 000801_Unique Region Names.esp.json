@@ -1,0 +1,27 @@
+{
+  "FormKey": "000801:Unique Region Names.esp",
+  "EditorID": "xxxMapFalkreath",
+  "MapColor": "#003F9452",
+  "Worldspace": "00003C:Skyrim.esm",
+  "RegionAreas": [
+    {
+      "EdgeFallOff": 1024,
+      "RegionPointListData": [
+        "-40205.242, -82442.36",
+        "-40205.242, -93509.945",
+        "-29137.66, -93700.766",
+        "-29710.121, -82251.55"
+      ]
+    }
+  ],
+  "Map": {
+    "Flags": [
+      "Override"
+    ],
+    "Priority": 60,
+    "Name": {
+      "TargetLanguage": "English",
+      "Value": "Falkreath"
+    }
+  }
+}

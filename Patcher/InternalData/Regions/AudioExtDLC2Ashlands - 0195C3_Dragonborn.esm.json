@@ -1,0 +1,27 @@
+{
+  "FormKey": "0195C3:Dragonborn.esm",
+  "EditorID": "AudioExtDLC2Ashlands",
+  "MapColor": "#00D1CCC9",
+  "Worldspace": "000800:Dragonborn.esm",
+  "RegionAreas": [
+    {
+      "EdgeFallOff": 1024,
+      "RegionPointListData": [
+        "-8091.461, 5481.3125",
+        "103101.05, 4959.2812",
+        "103101.05, 55596.266",
+        "-8091.461, 55596.266"
+      ]
+    }
+  ],
+  "Map": {
+    "Flags": [
+      "Override"
+    ],
+    "Priority": 58,
+    "Name": {
+      "TargetLanguage": "English",
+      "Value": "Ashlands"
+    }
+  }
+}
