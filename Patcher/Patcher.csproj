@@ -9,9 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Mutagen.Bethesda" Version="0.44.0" />
-    <PackageReference Include="Mutagen.Bethesda.Synthesis" Version="0.28.0" />
-    <PackageReference Include="Noggog.CSharpExt" Version="2.65.0-nightly-20240622-092375" />
+    <PackageReference Include="Mutagen.Bethesda.Skyrim" Version="0.45.1.1-nightly-20240729-095452" />
+    <PackageReference Include="Mutagen.Bethesda.Synthesis" Version="0.29.0" />
+    <PackageReference Include="Noggog.CSharpExt" Version="2.65.0-nightly-20240725-051927" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,6 +1,5 @@
 ﻿using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins;
-using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Implicit;
 using Mutagen.Bethesda.Skyrim;
 using Mutagen.Bethesda.Synthesis;
@@ -37,24 +36,25 @@ class Program
                 ? state.PatchMod.Regions.DuplicateInAsNewRecord(region)
                 : state.PatchMod.Regions.GetOrAddAsOverride(region);
         }).ToImmutableArray();
+        var worldspaces = regions.Select(static i => i.Worldspace)
+            .ToHashSet();
 
         var linkCache = state.LinkCache;
         var exteriorCells = state.LoadOrder.PriorityOrder.Cell()
             .WinningContextOverrides(linkCache)
-            .Where(static i => i.Record.Grid is not null && !i.Record.MajorFlags.HasFlag(Cell.MajorFlag.Persistent))
+            .Where(i => i.TryGetParent<IWorldspaceGetter>(out var parent) && worldspaces.Contains(parent))
+            .Where(static i => !i.Record.Flags.HasFlag(Cell.Flag.IsInteriorCell))
+            .Where(static i => !i.Record.MajorFlags.HasFlag(Cell.MajorFlag.Persistent))
             .ToImmutableArray();
 
         foreach (var grp in regions.GroupBy(static i => i.Worldspace)) 
         {
-            if (grp.Key.TryResolve(linkCache) is not IWorldspaceGetter world)
+            var world = grp.Key;
+            if (!world.TryResolveIdentifier(linkCache, out var _))
                 continue;
 
-            Dictionary<P2Int, IModContext<ISkyrimMod, ISkyrimModGetter, ICell, ICellGetter>> cellContexts = [];
-            foreach (var context in exteriorCells)
-            {
-                if (context.TryGetParent<IWorldspaceGetter>()?.FormKey == world.FormKey)
-                    cellContexts.Add(context.Record.Grid!.Point, context);
-            }
+            var cellContexts = exteriorCells.Where(i => i.TryGetParent<IWorldspaceGetter>()?.FormKey == world.FormKey)
+                .ToDictionary(i => i.Record.Grid!.Point);
 
             foreach (var region in grp)
             {
@@ -81,14 +81,14 @@ class Program
                         for (var y = y1; y2 - y > float.Epsilon; y += 4096f)
                         {
                             var segment = new SFloat(new(x, y), new(x1 - 4096f, y));
-                            var isInsideRegion   = segments.Count(i => Utilities.Intersects(segment, i)) % 2 > 0;
+                            var isInsideRegion = segments.Count(i => Utilities.Intersects(segment, i)) % 2 > 0;
                             var isOnSegment = segments.Any(i => Utilities.IsPointOnSegment(i.P1, segment.P1, i.P2));
 
-                            if ((isInsideRegion || isOnSegment) && 
+                            if ((isInsideRegion || isOnSegment) &&
                                 cellContexts.TryGetValue(new P2Int((int)Math.Floor(x / 4096.0), (int)Math.Floor(y / 4096.0)), out var ctx))
                             {
                                 if (ctx.Record.Regions is null ||
-                                    ctx.Record.Regions.Contains(link) is false) 
+                                    ctx.Record.Regions.Contains(link) is false)
                                 {
                                     (ctx.GetOrAddAsOverride(state.PatchMod).Regions ??= []).Add(link);
                                     addedCount++;

@@ -8,11 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Mutagen.Bethesda.Serialization" Version="1.20.1" />
-    <PackageReference Include="Mutagen.Bethesda.Serialization.Newtonsoft" Version="1.20.1" />
-    <PackageReference Include="Mutagen.Bethesda.Serialization.SourceGenerator" Version="1.20.1" />
-    <PackageReference Include="Mutagen.Bethesda.Skyrim" Version="0.44.0" />
-    <PackageReference Include="Noggog.CSharpExt" Version="2.65.0-nightly-20240622-092375" />
+    <PackageReference Include="Mutagen.Bethesda.Serialization" Version="1.22.0" />
+    <PackageReference Include="Mutagen.Bethesda.Serialization.Newtonsoft" Version="1.22.0" />
+    <PackageReference Include="Mutagen.Bethesda.Serialization.SourceGenerator" Version="1.22.0" />
+    <PackageReference Include="Mutagen.Bethesda.Skyrim" Version="0.45.1.1-nightly-20240729-095452" />
+    <PackageReference Include="Noggog.CSharpExt" Version="2.65.0-nightly-20240725-051927" />
   </ItemGroup>
 
 </Project>
