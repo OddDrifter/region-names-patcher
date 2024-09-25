@@ -5,6 +5,7 @@ using Mutagen.Bethesda.Skyrim;
 using Mutagen.Bethesda.Synthesis;
 using Noggog;
 using Patcher.Serialization;
+using System.Collections.Frozen;
 using System.Collections.Immutable;
 
 namespace Patcher;
@@ -32,12 +33,18 @@ class Program
         var mod = await Helper.DeserializeFromPath(dataPath);
         var regions = mod.Regions.Select(region =>
         {
-            return region.FormKey.ModKey == mod.ModKey
-                ? state.PatchMod.Regions.DuplicateInAsNewRecord(region)
-                : state.PatchMod.Regions.GetOrAddAsOverride(region);
+            if (state.LinkCache.TryResolve<IRegionGetter>(region.FormKey, out var getter))
+            {
+                var ret = state.PatchMod.Regions.GetOrAddAsOverride(getter);
+                ret.Map = region.Map;
+                return ret;
+            }
+            else 
+                return state.PatchMod.Regions.DuplicateInAsNewRecord(region);
         }).ToImmutableArray();
+
         var worldspaces = regions.Select(static i => i.Worldspace)
-            .ToHashSet();
+            .ToFrozenSet();
 
         var linkCache = state.LinkCache;
         var exteriorCells = state.LoadOrder.PriorityOrder.Cell()
