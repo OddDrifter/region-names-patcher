@@ -9,11 +9,10 @@
 
   <ItemGroup>
     <PackageReference Include="Loqui" Version="2.64.1" />
-    <PackageReference Include="Mutagen.Bethesda.Serialization" Version="1.22.0" />
-    <PackageReference Include="Mutagen.Bethesda.Serialization.Newtonsoft" Version="1.22.0" />
-    <PackageReference Include="Mutagen.Bethesda.Serialization.SourceGenerator" Version="1.22.0" />
-    <PackageReference Include="Mutagen.Bethesda.Skyrim" Version="0.46.0" />
-    <PackageReference Include="Noggog.CSharpExt" Version="2.65.1-nightly-20240911-092507" />
+    <PackageReference Include="Mutagen.Bethesda.Serialization" Version="1.25.0" />
+    <PackageReference Include="Mutagen.Bethesda.Serialization.Newtonsoft" Version="1.25.0" />
+    <PackageReference Include="Mutagen.Bethesda.Serialization.SourceGenerator" Version="1.25.0" />
+    <PackageReference Include="Mutagen.Bethesda.Skyrim" Version="0.47.0" />
   </ItemGroup>
 
 </Project>
