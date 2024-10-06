@@ -4,7 +4,7 @@ using Noggog;
 
 namespace Patcher;
 
-public record SFloat(P2Float P1, P2Float P2);
+public record Segment(P2Float P1, P2Float P2);
 
 public static class Utilities
 {
@@ -40,7 +40,7 @@ public static class Utilities
             p2.Y <= Math.Max(p1.Y, p3.Y) && p2.Y >= Math.Min(p1.Y, p3.Y);
     }
 
-    public static bool Intersects(SFloat s1, SFloat s2)
+    public static bool Intersects(Segment s1, Segment s2)
     {
         var o1 = FindOrientation(s1.P1, s1.P2, s2.P1);
         var o2 = FindOrientation(s1.P1, s1.P2, s2.P2);

@@ -1,5 +1,6 @@
 ﻿using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins;
+using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Implicit;
 using Mutagen.Bethesda.Skyrim;
 using Mutagen.Bethesda.Synthesis;
@@ -30,83 +31,84 @@ class Program
         if (state.InternalDataPath is not DirectoryPath dataPath)
             throw new DirectoryNotFoundException();
 
-        var mod = await Helper.DeserializeFromPath(dataPath);
-        var regions = mod.Regions.Select(region =>
+        var mod     = await Helper.DeserializeFromPath(dataPath);
+        var regions = ImmutableArray.CreateRange(mod.Regions.Select(region =>
         {
             if (state.LinkCache.TryResolve<IRegionGetter>(region.FormKey, out var getter))
             {
                 var ret = state.PatchMod.Regions.GetOrAddAsOverride(getter);
-                ret.Map = region.Map;
+                ret.Map ??= region.Map;
                 return ret;
             }
-            else 
-                return state.PatchMod.Regions.DuplicateInAsNewRecord(region);
-        }).ToImmutableArray();
+            return state.PatchMod.Regions.DuplicateInAsNewRecord(region);
+        }));
 
-        var worldspaces = regions.Select(static i => i.Worldspace)
-            .ToFrozenSet();
+        using var loadOrder = state.LoadOrder;
 
-        var linkCache = state.LinkCache;
-        var exteriorCells = state.LoadOrder.PriorityOrder.Cell()
-            .WinningContextOverrides(linkCache)
-            .Where(i => i.TryGetParent<IWorldspaceGetter>(out var parent) && worldspaces.Contains(parent))
+        var linkCache   = state.LinkCache;
+        var worldspaces = FrozenDictionary.ToFrozenDictionary(
+            regions.Select(static i => i.Worldspace).Where(static i => !i.IsNull).Distinct(),
+            static i => i.AsGetter(), 
+            static i => new Dictionary<P2Int, IModContext<ISkyrimMod, ISkyrimModGetter, ICell, ICellGetter>>()
+        );
+
+        var exteriorCells = loadOrder.PriorityOrder
+            .OnlyEnabledAndExisting().Cell().WinningContextOverrides(linkCache)
             .Where(static i => !i.Record.Flags.HasFlag(Cell.Flag.IsInteriorCell))
-            .Where(static i => !i.Record.MajorFlags.HasFlag(Cell.MajorFlag.Persistent))
-            .ToImmutableArray();
+            .Where(static i => !i.Record.MajorFlags.HasFlag(Cell.MajorFlag.Persistent));
 
-        foreach (var grp in regions.GroupBy(static i => i.Worldspace)) 
+        foreach (var cellContext in exteriorCells)
         {
-            var world = grp.Key;
-            if (!world.TryResolveIdentifier(linkCache, out var _))
+            if (cellContext.TryGetParent<IWorldspaceGetter>()?.ToNullableLink() is not { } link || !worldspaces.ContainsKey(link))
+                continue;
+            worldspaces[link].Add(cellContext.Record.Grid!.Point, cellContext);
+        }
+
+        foreach (var region in regions)
+        {
+            if (!worldspaces.TryGetValue(region.Worldspace, out var cellContexts))
                 continue;
 
-            var cellContexts = exteriorCells.Where(i => i.TryGetParent<IWorldspaceGetter>()?.FormKey == world.FormKey)
-                .ToDictionary(i => i.Record.Grid!.Point);
+            int count = 0;
+            var formLink = region.ToLink();
 
-            foreach (var region in grp)
+            foreach (var area in region.RegionAreas)
             {
-                int addedCount = 0;
-                var link = region.ToLink();
+                if (area.RegionPointListData is not ExtendedList<P2Float> points)
+                    continue;
 
-                foreach (var area in region.RegionAreas)
+                float x1 = points.Min(static i => i.X);
+                float y1 = points.Min(static i => i.Y);
+                float x2 = points.Max(static i => i.X);
+                float y2 = points.Max(static i => i.Y);
+
+                List<Segment> segments = [];
+                for (var i = 0; i < points.Count - 1; i++)
+                    segments.Add(new Segment(points[i], points[i + 1]));
+                segments.Add(new Segment(points[^1], points[0]));
+
+                for (var x = x1; x2 - x > float.Epsilon; x += 4096f)
                 {
-                    if (area.RegionPointListData is not ExtendedList<P2Float> points)
-                        continue;
-
-                    float x1 = points.Min(static i => i.X);
-                    float y1 = points.Min(static i => i.Y);
-                    float x2 = points.Max(static i => i.X);
-                    float y2 = points.Max(static i => i.Y);
-
-                    List<SFloat> segments = [];
-                    for (var i = 0; i < points.Count - 1; i++)
-                        segments.Add(new SFloat(points[i], points[i + 1]));
-                    segments.Add(new SFloat(points[^1], points[0]));
-
-                    for (var x = x1; x2 - x > float.Epsilon; x += 4096f)
+                    for (var y = y1; y2 - y > float.Epsilon; y += 4096f)
                     {
-                        for (var y = y1; y2 - y > float.Epsilon; y += 4096f)
-                        {
-                            var segment = new SFloat(new(x, y), new(x1 - 4096f, y));
-                            var isInsideRegion = segments.Count(i => Utilities.Intersects(segment, i)) % 2 > 0;
-                            var isOnSegment = segments.Any(i => Utilities.IsPointOnSegment(i.P1, segment.P1, i.P2));
+                        var segment     = new Segment(new(x, y), new(x1 - 4096f, y));
+                        var isInRegion  = segments.Count(i => Utilities.Intersects(segment, i)) % 2 > 0;
+                        var isOnSegment = segments.Any(i => Utilities.IsPointOnSegment(i.P1, segment.P1, i.P2));
 
-                            if ((isInsideRegion || isOnSegment) &&
-                                cellContexts.TryGetValue(new P2Int((int)Math.Floor(x / 4096.0), (int)Math.Floor(y / 4096.0)), out var ctx))
+                        if ((isInRegion || isOnSegment) &&
+                            cellContexts.TryGetValue(new P2Int((int)Math.Floor(x / 4096.0), (int)Math.Floor(y / 4096.0)), out var ctx))
+                        {
+                            if (!ctx.Record.Regions?.Contains(formLink) ?? true)
                             {
-                                if (ctx.Record.Regions is null ||
-                                    ctx.Record.Regions.Contains(link) is false)
-                                {
-                                    (ctx.GetOrAddAsOverride(state.PatchMod).Regions ??= []).Add(link);
-                                    addedCount++;
-                                }
+                                (ctx.GetOrAddAsOverride(state.PatchMod).Regions ??= []).Add(formLink);
+                                count++;
                             }
                         }
                     }
                 }
-
-                Console.WriteLine($"Added region [{region.FormKey}] {region.EditorID} to {addedCount} cell(s)");
             }
+
+            Console.WriteLine($"Added region [{region.FormKey}] {region.EditorID} to {count} cell(s)");
         }
     }
 }
