@@ -1,6 +1,8 @@
 ﻿using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins.Cache;
 using Noggog;
+using System.Collections.Immutable;
+using System.Numerics;
 
 namespace Patcher;
 
@@ -8,9 +10,19 @@ public record Segment(P2Float P1, P2Float P2);
 
 public static class Utilities
 {
-    //public static P2Float Min(P2Float i, P2Float k) => new(Math.Min(i.X, k.X), Math.Min(i.Y, k.Y));
+    public static ImmutableArray<P2Float> Directions { get; } = ImmutableArray.CreateRange<P2Float>([
+        new(0, 0), new(4096, 0), new(0, 4096), new(4096, 4096)
+    ]);
 
-    //public static P2Float Round(this P2Float p) => new((float)Math.Round(p.X), (float)Math.Round(p.Y)); 
+    public static T NearestMult<T>(this T num, T fac, MidpointRounding mode = MidpointRounding.AwayFromZero) where T : IFloatingPoint<T>
+    {
+        return T.Round(num / fac, mode) * fac;
+    }
+
+    public static T NearestCeilingOf<T>(this T t, T factor) where T : IFloatingPoint<T> => NearestMult(t, factor, MidpointRounding.ToPositiveInfinity);
+  
+    public static T NearestFloorOf<T>(this T t, T factor) where T : IFloatingPoint<T> => NearestMult(t, factor, MidpointRounding.ToNegativeInfinity);
+
 
     public static T? TryGetParent<T>(this IModContext context)
     {

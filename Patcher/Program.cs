@@ -77,32 +77,44 @@ class Program
                 if (area.RegionPointListData is not ExtendedList<P2Float> points)
                     continue;
 
-                float x1 = points.Min(static i => i.X);
-                float y1 = points.Min(static i => i.Y);
-                float x2 = points.Max(static i => i.X);
-                float y2 = points.Max(static i => i.Y);
-
                 List<Segment> segments = [];
                 for (var i = 0; i < points.Count - 1; i++)
                     segments.Add(new Segment(points[i], points[i + 1]));
                 segments.Add(new Segment(points[^1], points[0]));
 
-                for (var x = x1; x2 - x > float.Epsilon; x += 4096f)
-                {
-                    for (var y = y1; y2 - y > float.Epsilon; y += 4096f)
-                    {
-                        var segment     = new Segment(new(x, y), new(x1 - 4096f, y));
-                        var isInRegion  = segments.Count(i => Utilities.Intersects(segment, i)) % 2 > 0;
-                        var isOnSegment = segments.Any(i => Utilities.IsPointOnSegment(i.P1, segment.P1, i.P2));
+                float x1 = points.Min(static i => i.X).NearestFloorOf(4096);
+                float y1 = points.Min(static i => i.Y).NearestFloorOf(4096);
+                float x2 = points.Max(static i => i.X).NearestCeilingOf(4096);
+                float y2 = points.Max(static i => i.Y).NearestCeilingOf(4096);
 
-                        if ((isInRegion || isOnSegment) &&
-                            cellContexts.TryGetValue(new P2Int((int)Math.Floor(x / 4096.0), (int)Math.Floor(y / 4096.0)), out var ctx))
+                for (var x = x1; x <= x2; x += 4096f)
+                {
+                    for (var y = y1; y <= y2; y += 4096f)
+                    {
+                        var gx = (int)(x / 4096f);
+                        var gy = (int)(y / 4096f);
+
+                        if (!cellContexts.TryGetValue(new(gx, gy), out var ctx))
+                            continue;
+
+                        bool isInRegion = false;
+                        Segment segment = new (new(x1, y1), new(x, y));
+                        if (segments.Count(i => Utilities.Intersects(segment, i)) % 2 > 0)
+                            isInRegion = true;
+
+                        if (!isInRegion)
                         {
-                            if (!ctx.Record.Regions?.Contains(formLink) ?? true)
+                            foreach (var edge in Utilities.Directions.Select(i => new Segment(new(x, y), new(x + i.X, y + i.Y))))
                             {
-                                (ctx.GetOrAddAsOverride(state.PatchMod).Regions ??= []).Add(formLink);
-                                count++;
+                                if (segments.Any(i => Utilities.Intersects(edge, i)))
+                                    isInRegion = true;
                             }
+                        }
+
+                        if (isInRegion && (!ctx.Record.Regions?.Contains(formLink) ?? true))
+                        {
+                            (ctx.GetOrAddAsOverride(state.PatchMod).Regions ??= []).Add(formLink);
+                            count++;
                         }
                     }
                 }
