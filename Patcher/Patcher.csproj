@@ -9,9 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Loqui" Version="2.64.1" />
-    <PackageReference Include="Mutagen.Bethesda.Skyrim" Version="0.47.0" />
-    <PackageReference Include="Mutagen.Bethesda.Synthesis" Version="0.30.4" />
+    <PackageReference Include="Mutagen.Bethesda.Skyrim" Version="0.49.0" />
+    <PackageReference Include="Mutagen.Bethesda.Synthesis" Version="0.33.3" />
   </ItemGroup>
 
   <ItemGroup>

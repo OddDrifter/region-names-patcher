@@ -59,7 +59,7 @@ class Program
 
         foreach (var cellContext in exteriorCells)
         {
-            if (cellContext.TryGetParent<IWorldspaceGetter>()?.ToNullableLink() is not { } link || !worldspaces.ContainsKey(link))
+            if (cellContext.TryGetParent<IWorldspaceGetter>()?.ToNullableLink() is not { IsNull: false } link || !worldspaces.ContainsKey(link))
                 continue;
             worldspaces[link].Add(cellContext.Record.Grid!.Point, cellContext);
         }
@@ -78,38 +78,38 @@ class Program
                     continue;
 
                 List<Segment> segments = [];
-                for (var i = 0; i < points.Count - 1; i++)
-                    segments.Add(new Segment(points[i], points[i + 1]));
-                segments.Add(new Segment(points[^1], points[0]));
+                for (int i = 0; i < points.Count; i++)
+                    segments.Add(new Segment(points[i], points[(i + 1) % points.Count]));
 
                 float x1 = points.Min(static i => i.X).NearestFloorOf(4096);
                 float y1 = points.Min(static i => i.Y).NearestFloorOf(4096);
                 float x2 = points.Max(static i => i.X).NearestCeilingOf(4096);
                 float y2 = points.Max(static i => i.Y).NearestCeilingOf(4096);
 
+                P2Float sw = new(x1, y1);
+
                 for (var x = x1; x <= x2; x += 4096f)
                 {
                     for (var y = y1; y <= y2; y += 4096f)
                     {
-                        var gx = (int)(x / 4096f);
-                        var gy = (int)(y / 4096f);
-
-                        if (!cellContexts.TryGetValue(new(gx, gy), out var ctx))
-                            continue;
-
-                        bool isInRegion = false;
-                        Segment segment = new (new(x1, y1), new(x, y));
-                        if (segments.Count(i => Utilities.Intersects(segment, i)) % 2 > 0)
-                            isInRegion = true;
+                        P2Float point   = new(x, y);
+                        Segment segment = new(sw, point);
+                        bool isInRegion = segments.Count(i => Utilities.Intersects(segment, i)) % 2 > 0;
 
                         if (!isInRegion)
                         {
-                            foreach (var edge in Utilities.Directions.Select(i => new Segment(new(x, y), new(x + i.X, y + i.Y))))
+                            foreach (var edge in Utilities.Directions.Select(i => new Segment(point, point + i)))
                             {
-                                if (segments.Any(i => Utilities.Intersects(edge, i)))
+                                if (segments.Find(i => Utilities.Intersects(edge, i)) is not null)
+                                {
                                     isInRegion = true;
+                                    break;
+                                }
                             }
                         }
+
+                        if (!cellContexts.TryGetValue(new((int)(x / 4096f), (int)(y / 4096f)), out var ctx))
+                            continue;
 
                         if (isInRegion && (!ctx.Record.Regions?.Contains(formLink) ?? true))
                         {
