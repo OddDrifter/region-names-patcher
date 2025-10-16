@@ -9,18 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Mutagen.Bethesda.Skyrim" Version="0.49.0" />
-    <PackageReference Include="Mutagen.Bethesda.Synthesis" Version="0.33.3" />
+    <PackageReference Include="Mutagen.Bethesda.Serialization" Version="1.37.1" />
+    <PackageReference Include="Mutagen.Bethesda.Serialization.Newtonsoft" Version="1.37.1" />
+    <PackageReference Include="Mutagen.Bethesda.Serialization.SourceGenerator" Version="1.37.1" />
+    <PackageReference Include="Mutagen.Bethesda.Skyrim" Version="0.51.5" />
+    <PackageReference Include="Mutagen.Bethesda.Synthesis" Version="0.35.2" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="InternalData\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Patcher.Serialization\Patcher.Serialization.csproj" />
   </ItemGroup>
 
 </Project>

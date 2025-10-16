@@ -1,6 +1,6 @@
 ﻿using Mutagen.Bethesda.Serialization.Customizations;
 
-namespace Patcher.Serialization;
+namespace Patcher;
 
 public class Customizations : ICustomize
 {
