@@ -14,21 +14,19 @@ public static class Utilities
         new(0, 0), new(4096, 0), new(0, 4096), new(4096, 4096)
     ]);
 
-    public static T NearestMult<T>(this T num, T fac, MidpointRounding mode = MidpointRounding.AwayFromZero) where T : IFloatingPoint<T>
-    {
-        return T.Round(num / fac, mode) * fac;
-    }
+    public static T NearestMult<T>(this T num, T fac, MidpointRounding mode = MidpointRounding.AwayFromZero) where T : IFloatingPoint<T> =>
+        T.Round(num / fac, mode) * fac;
 
-    public static T NearestCeilingOf<T>(this T t, T factor) where T : IFloatingPoint<T> => NearestMult(t, factor, MidpointRounding.ToPositiveInfinity);
+    public static T NearestCeilingOf<T>(this T t, T factor) where T : IFloatingPoint<T> => 
+        NearestMult(t, factor, MidpointRounding.ToPositiveInfinity);
   
-    public static T NearestFloorOf<T>(this T t, T factor) where T : IFloatingPoint<T> => NearestMult(t, factor, MidpointRounding.ToNegativeInfinity);
-
-
     public static T? TryGetParent<T>(this IModContext context)
     {
         context.TryGetParent<T>(out var item);
         return item;
     }
+    public static T NearestFloorOf<T>(this T t, T factor) where T : IFloatingPoint<T> => 
+        NearestMult(t, factor, MidpointRounding.ToNegativeInfinity);
 
     public enum Orientation
     {
