@@ -120,7 +120,7 @@ class Program
                 }
             }
 
-            Console.WriteLine($"Added region [{region.FormKey}] {region.EditorID} to {count} cell(s)");
+            Console.WriteLine($"Added region {region.EditorID} \"{region.Map?.Name}\" <{region.FormKey}> to {count} cell(s)");
         }
     }
 }
