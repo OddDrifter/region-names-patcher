@@ -2,10 +2,10 @@
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Implicit;
-using Mutagen.Bethesda.Serialization.Newtonsoft;
 using Mutagen.Bethesda.Skyrim;
 using Mutagen.Bethesda.Synthesis;
 using Noggog;
+using Patcher.Serialization;
 using System.Collections.Frozen;
 using System.Collections.Immutable;
 
@@ -28,10 +28,10 @@ class Program
 
     public static async void Func(IPatcherState<ISkyrimMod, ISkyrimModGetter> state)
     {
-        if (state.InternalDataPath is not { } dataPath)
+        if (state.InternalDataPath is not DirectoryPath dataPath)
             throw new DirectoryNotFoundException();
 
-        var mod = await MutagenJsonConverter.Instance.Deserialize(dataPath);
+        var mod     = await Helper.DeserializeFromPath(dataPath);
         var regions = ImmutableArray.CreateRange(mod.Regions.Select(region =>
         {
             if (state.LinkCache.TryResolve<IRegionGetter>(region.FormKey, out var getter))
@@ -59,13 +59,9 @@ class Program
 
         foreach (var cellContext in exteriorCells)
         {
-            if (!cellContext.TryGetParent<IWorldspaceGetter>(out var parent) || !worldspaces.TryGetValue(parent.ToNullableLink(), out var dict))
+            if (cellContext.TryGetParent<IWorldspaceGetter>()?.ToNullableLink() is not { IsNull: false } link || !worldspaces.ContainsKey(link))
                 continue;
-
-            if (cellContext.Record.Grid is not { } cellGrid)
-                continue;
-
-            _ = dict.TryAdd(cellGrid.Point, cellContext);
+            worldspaces[link].Add(cellContext.Record.Grid!.Point, cellContext);
         }
 
         foreach (var region in regions)

@@ -1,7 +1,5 @@
 ﻿using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins.Cache;
-using Mutagen.Bethesda.Serialization.Newtonsoft;
-using Mutagen.Bethesda.Skyrim;
 using Noggog;
 using System.Collections.Immutable;
 using System.Numerics;
@@ -26,11 +24,11 @@ public static class Utilities
     public static T NearestFloorOf<T>(this T t, T factor) where T : IFloatingPoint<T> => NearestMult(t, factor, MidpointRounding.ToNegativeInfinity);
 
 
-    //public static T? TryGetParent<T>(this IModContext<T> context)
-    //{
-    //    _ = context.TryGetParent<T>(out var item);
-    //    return item;
-    //}
+    public static T? TryGetParent<T>(this IModContext context)
+    {
+        context.TryGetParent<T>(out var item);
+        return item;
+    }
 
     public enum Orientation
     {
@@ -78,12 +76,4 @@ public static class Utilities
 
         return false;
     }
-
-    private static Task Hint(ISkyrimModGetter mod) => 
-        MutagenJsonConverter.Instance.Serialize(mod, "");
-
-    //public static async Task<ISkyrimMod> DeserializeFromPath(DirectoryPath path)
-    //{
-    //    return await MutagenJsonConverter.Instance.Deserialize(path);
-    //}
 }

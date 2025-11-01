@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Readme.md = Readme.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patcher.Serialization", "Patcher.Serialization\Patcher.Serialization.csproj", "{F80E9A32-CB76-E007-3E7F-C60AEC149326}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -20,6 +22,10 @@ Global
 		{777AE347-8CDD-4AF4-A99B-18421A818BCE}.Debug|x64.Build.0 = Debug|x64
 		{777AE347-8CDD-4AF4-A99B-18421A818BCE}.Release|x64.ActiveCfg = Release|x64
 		{777AE347-8CDD-4AF4-A99B-18421A818BCE}.Release|x64.Build.0 = Release|x64
+		{F80E9A32-CB76-E007-3E7F-C60AEC149326}.Debug|x64.ActiveCfg = Debug|x64
+		{F80E9A32-CB76-E007-3E7F-C60AEC149326}.Debug|x64.Build.0 = Debug|x64
+		{F80E9A32-CB76-E007-3E7F-C60AEC149326}.Release|x64.ActiveCfg = Release|x64
+		{F80E9A32-CB76-E007-3E7F-C60AEC149326}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
