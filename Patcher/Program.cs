@@ -1,12 +1,10 @@
 ﻿using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins;
-using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Plugins.Implicit;
 using Mutagen.Bethesda.Skyrim;
 using Mutagen.Bethesda.Synthesis;
 using Noggog;
 using Patcher.Serialization;
-using System.Collections.Frozen;
 using System.Collections.Immutable;
 
 namespace Patcher;
@@ -46,32 +44,19 @@ class Program
         using var loadOrder = state.LoadOrder;
 
         var linkCache   = state.LinkCache;
-        var worldspaces = FrozenDictionary.ToFrozenDictionary(
-            regions.Select(static i => i.Worldspace).Where(static i => !i.IsNull).Distinct(),
-            static i => i.AsGetter(), 
-            static i => new Dictionary<P2Int, IModContext<ISkyrimMod, ISkyrimModGetter, ICell, ICellGetter>>()
-        );
-
-        var exteriorCells = loadOrder.PriorityOrder
-            .OnlyEnabledAndExisting().Cell().WinningContextOverrides(linkCache)
-            .Where(static i => !i.Record.Flags.HasFlag(Cell.Flag.IsInteriorCell))
-            .Where(static i => !i.Record.MajorFlags.HasFlag(Cell.MajorFlag.Persistent));
-
-        foreach (var cellContext in exteriorCells)
-        {
-            if (cellContext.TryGetParent<IWorldspaceGetter>()?.ToNullableLink() is not { IsNull: false } link || !worldspaces.ContainsKey(link))
-                continue;
-
-            _ = worldspaces[link].TryAdd(cellContext.Record.Grid!.Point, cellContext);
-        }
+        var cellContexts = loadOrder.PriorityOrder.Cell().WinningContextOverrides(linkCache)
+            .Where(i => i.TryGetParent<IWorldspaceGetter>(out _)).ToList();
+        var worldspaces = regions.Select(static i => i.Worldspace).Distinct()
+            .Select(i => i.TryResolve(linkCache)).OfType<IWorldspaceGetter>()
+            .ToDictionary(i => i.ToNullableLink(), i => new Utilities.WorldspaceCellCache(i, cellContexts));
 
         foreach (var region in regions)
         {
-            if (!worldspaces.TryGetValue(region.Worldspace, out var cellContexts))
+            if (!worldspaces.TryGetValue(region.Worldspace, out var _cellCache))
                 continue;
 
             int count = 0;
-            var formLink = region.ToLink();
+            var formLink = region.ToLinkGetter();
 
             foreach (var area in region.RegionAreas)
             {
@@ -109,12 +94,19 @@ class Program
                             }
                         }
 
-                        if (!cellContexts.TryGetValue(new((int)(x / 4096f), (int)(y / 4096f)), out var ctx))
+                        var gx = (int)(x / 4096f);
+                        var gy = (int)(y / 4096f);
+
+                        if (!_cellCache.TryGetCellAt(gx, gy, out var _cellContext))
                             continue;
 
-                        if (isInRegion && (!ctx.Record.Regions?.Contains(formLink) ?? true))
+                        if (isInRegion && (
+                            _cellContext.Record.Regions is null || !_cellContext.Record.Regions.Contains(formLink)))
                         {
-                            (ctx.GetOrAddAsOverride(state.PatchMod).Regions ??= []).Add(formLink);
+                            var dup = _cellContext.GetOrAddAsOverride(state.PatchMod);
+                            dup.Regions ??= [];
+                            dup.Regions.Add(formLink);
+
                             count++;
                         }
                     }

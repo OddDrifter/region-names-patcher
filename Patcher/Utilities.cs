@@ -1,8 +1,16 @@
 ﻿using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins.Cache;
+using Mutagen.Bethesda.Skyrim;
 using Noggog;
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
+using ICellContext =
+    Mutagen.Bethesda.Plugins.Cache.IModContext<
+        Mutagen.Bethesda.Skyrim.ISkyrimMod,
+        Mutagen.Bethesda.Skyrim.ISkyrimModGetter,
+        Mutagen.Bethesda.Skyrim.ICell,
+        Mutagen.Bethesda.Skyrim.ICellGetter>;
 
 namespace Patcher;
 
@@ -10,6 +18,29 @@ public record Segment(P2Float P1, P2Float P2);
 
 public static class Utilities
 {
+    public class WorldspaceCellCache
+    {
+        private readonly Dictionary<P2Int, ICellContext> _cells;
+
+        public WorldspaceCellCache(IWorldspaceGetter getter, IEnumerable<ICellContext> cellContexts)
+        {
+            _cells = [];
+            foreach (var ctx in cellContexts)
+            {
+                if (ctx.Record.MajorFlags.HasFlag(Cell.MajorFlag.Persistent) || 
+                    ctx.Record.Flags.HasFlag(Cell.Flag.IsInteriorCell) ||
+                    ctx.Record.Grid is not { } grid)
+                    continue;
+
+                if (ctx.TryGetParent<IWorldspaceGetter>(out var parent) && parent.FormKey == getter.FormKey)
+                    _cells.TryAdd(grid.Point, ctx);
+            }
+        }
+
+        public bool TryGetCellAt(int x, int y, [MaybeNullWhen(false)] out ICellContext cellContext) =>
+            _cells.TryGetValue(new P2Int(x, y), out cellContext);
+    }
+
     public static ImmutableArray<P2Float> Directions { get; } = ImmutableArray.CreateRange<P2Float>([
         new(0, 0), new(4096, 0), new(0, 4096), new(4096, 4096)
     ]);
@@ -20,11 +51,6 @@ public static class Utilities
     public static T NearestCeilingOf<T>(this T t, T factor) where T : IFloatingPoint<T> => 
         NearestMult(t, factor, MidpointRounding.ToPositiveInfinity);
   
-    public static T? TryGetParent<T>(this IModContext context)
-    {
-        context.TryGetParent<T>(out var item);
-        return item;
-    }
     public static T NearestFloorOf<T>(this T t, T factor) where T : IFloatingPoint<T> => 
         NearestMult(t, factor, MidpointRounding.ToNegativeInfinity);
 
